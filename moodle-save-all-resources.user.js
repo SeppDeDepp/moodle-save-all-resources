@@ -7,7 +7,7 @@
 // @description   This script is meant to facilitate the downloads on a Moodle Class by adding a Download All button to every Session.
 // @icon          https://www.google.com/s2/favicons?domain=moodle.org
 // @run-at        document-end
-// @match         http://lms.incae.edu/course/view.php*
+// @match         https://moodle.ph-ludwigsburg.de/course/view.php*
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
 // ==/UserScript==
 
@@ -41,29 +41,30 @@ function injmain()
     };
     function step1()
     { 
-        require("http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js", step2);
+        require("https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js", step2);
     };
     function step2()
     { 
-        require("https://raw.github.com/sapeish/multiDownload/use-a-download/jquery.multiDownload.js", step3);
+        require("https://rawgit.com/sapeish/multiDownload/use-a-download/jquery.multiDownload.js", step3);
     };
     function step3()
     { 
-        require("https://raw.github.com/sapeish/jszip/load-from-url/jszip.js", step4);
+        require("https://rawgit.com/Trekky12/jszip/load-from-url/jszip.js", step4);
     };
     function step4()
     { 
         function cleanSpecialCharacters(string) {
-            string = string.replace(/á/g, "a");
-            string = string.replace(/é/g, "e");
-            string = string.replace(/í/g, "i");
-            string = string.replace(/ó/g, "o");
-            string = string.replace(/ú/g, "u");
-            string = string.replace(/ñ/g, "n");
-            string = string.replace(/ç/g, "c");
+            string = string.replace(/ï¿½/g, "a");
+            string = string.replace(/ï¿½/g, "e");
+            string = string.replace(/ï¿½/g, "i");
+            string = string.replace(/ï¿½/g, "o");
+            string = string.replace(/ï¿½/g, "u");
+            string = string.replace(/ï¿½/g, "n");
+            string = string.replace(/ï¿½/g, "c");
             return string;
         }
         function getExtensionFromURL(url) {
+            console.log(url);
             var name = "image";
             name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
             var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
@@ -81,6 +82,7 @@ function injmain()
                 result = "vsd";
             if(result == "project")
                 result = "mp";
+            console.log(result);
             return result;
         }
         
@@ -89,7 +91,9 @@ function injmain()
             var aelement = document.createElement('a');
             aelement.download = name;
             aelement.href = url;
-            aelement.click();
+            //aelement.click();
+            //aelement.trigger('click');
+            console.log(aelement);
         }
         
         function generateZip(button, group, fname)
