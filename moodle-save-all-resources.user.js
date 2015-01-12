@@ -50,8 +50,17 @@ function injmain()
     function step3()
     { 
         require("https://rawgit.com/Trekky12/jszip/load-from-url/jszip.js", step4);
+        //require("https://rawgit.com/Stuk/jszip/master/dist/jszip.js", step4);
+        
     };
-    function step4()
+    function step4(){
+        require("https://rawgit.com/Stuk/jszip-utils/master/dist/jszip-utils.js", step5);
+    };
+    
+    function step5(){
+        require("https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.js ", step6);
+    };
+    function step6()
     { 
         function cleanSpecialCharacters(string) {
             string = string.replace(/�/g, "a");
@@ -64,7 +73,6 @@ function injmain()
             return string;
         }
         function getExtensionFromURL(url) {
-            console.log(url);
             var name = "image";
             name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
             var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
@@ -82,7 +90,6 @@ function injmain()
                 result = "vsd";
             if(result == "project")
                 result = "mp";
-            console.log(result);
             return result;
         }
         
@@ -93,7 +100,8 @@ function injmain()
             aelement.href = url;
             //aelement.click();
             //aelement.trigger('click');
-            console.log(aelement);
+            //console.log(aelement);
+            //saveAs(url, name);
         }
         
         function generateZip(button, group, fname)
@@ -122,8 +130,9 @@ function injmain()
                         $("#loader-"+group).css("display", "none");
                         textupdate.innerHTML = "";
                         var name = foldername+".zip";
-                        var url = window.URL.createObjectURL(content);
-                        triggerDownoad(name, url);
+                        /*var url = window.URL.createObjectURL(content);
+                        triggerDownoad(name, url);*/
+                        saveAs(content, name);
                         $(button).data("working", null);
                         $(button).attr("style", "");
                     }
@@ -138,8 +147,23 @@ function injmain()
                 var name = $(this).data("name");
                 var url = $(this).data("url");
                 var id = $(this).attr("id");
+                
+                var iconurl = $("img", this).attr("src");
+				var ext = iconurl.substr(iconurl.lastIndexOf('/') + 1);
+                ext = ext.substr(0,ext.indexOf('-') );
+                name = name + ext;     
                 folder.fileURL(name, url, id, callback, {xhrtype:"blob"});
-            });        
+                // loading a file and add it in a zip file
+                /*JSZipUtils.getBinaryContent(url, function (err, data) {
+                   console.log(url);
+                    if(err) {
+                        console.log(err);
+                      throw err; // or handle the error
+                   }
+                    
+                   folder.file(name, data, {binary:true});
+                });*/
+            });    
         }
 
         // add the downloadall div
