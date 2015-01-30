@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name          Moodle Class Resoureces Downloader
 // @namespace     http://rococolabs.org
-// @author        Diego Carvallo
+// @author        Diego Carvallo, Tobias Haegenlaeuer
 // @copyright     2013+, rococolabs.org
-// @version       1.0rc1
+// @version       1.1
 // @description   This script is meant to facilitate the downloads on a Moodle Class by adding a Download All button to every Session.
 // @icon          https://www.google.com/s2/favicons?domain=moodle.org
 // @run-at        document-end
@@ -50,7 +50,6 @@ function injmain()
     function step3()
     { 
         require("https://rawgit.com/Trekky12/jszip/load-from-url/jszip.js", step4);
-        //require("https://rawgit.com/Stuk/jszip/master/dist/jszip.js", step4);
         
     };
     function step4(){
@@ -93,7 +92,7 @@ function injmain()
             return result;
         }
         
-        function triggerDownoad(name, url)
+        function triggerDownload(name, url)
         {
             var aelement = document.createElement('a');
             aelement.download = name;
@@ -130,8 +129,6 @@ function injmain()
                         $("#loader-"+group).css("display", "none");
                         textupdate.innerHTML = "";
                         var name = foldername+".zip";
-                        /*var url = window.URL.createObjectURL(content);
-                        triggerDownoad(name, url);*/
                         saveAs(content, name);
                         $(button).data("working", null);
                         $(button).attr("style", "");
@@ -151,18 +148,24 @@ function injmain()
                 var iconurl = $("img", this).attr("src");
 				var ext = iconurl.substr(iconurl.lastIndexOf('/') + 1);
                 ext = ext.substr(0,ext.indexOf('-') );
+                
+                if(ext == "powerpoint")
+                    ext = "ppt";
+                if(ext == "document")
+                    ext = "doc";
+                if(ext == "excel")
+                    ext = "xls";
+                if(ext == "spreadsheet")
+                    ext = "ods";
+                if(ext == "writer")
+                    ext = "odt";
+                if(ext == "text")
+                    ext = "rtf";
+                if(ext == "archive")
+                    ext = "zip";
+                
                 name = name + ext;     
                 folder.fileURL(name, url, id, callback, {xhrtype:"blob"});
-                // loading a file and add it in a zip file
-                /*JSZipUtils.getBinaryContent(url, function (err, data) {
-                   console.log(url);
-                    if(err) {
-                        console.log(err);
-                      throw err; // or handle the error
-                   }
-                    
-                   folder.file(name, data, {binary:true});
-                });*/
             });    
         }
 
@@ -190,7 +193,8 @@ function injmain()
         $(".section.main .content .section.img-text .activity a .downloadstatus").css("background","url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAA1hJREFUSEvtlW1IU1EYx4+b5Fa6u93pGpmaFa4kgrZw9SGIlLxSsfmhsrZYLxCsjKLXD30IEkmjF5BeIMuXomkj1MJE0lraiKg73Xq1GEZOafrBINtY2u30nHWKVmZ9WBbRD/6cc57n+cNz7n24F/0nylxCaIodoUKQDeSkIvtCkqNlf4hLSWnInsSDOBqJoBahFXVSqcOt1/sGzObA0JYtwhurVeg3mQKdWVk+kiM1tHycuZgoRzWJDZsH92FYeVDEJS5CY1fkcpffZAq+sliwz2SKEIn1FhQEGxjGRWqpbZw4r5yALiRWzLuT3be2Zyu29O8YgTNPs6gaRqNWInH0rFoVfJafj58aDKOqy2jEXoMhWBMX5yAeav/NVLIxqEpZPK1Z123s2oCXPTYPx9emPkDVyuW0AlXAfN/Ran2evDx8b8mSMdWZm4tvZGb6iIfao0Q5y4H48Po15axVaZ/ZtbRz9Ycc10pBXpP+BJ1lN9FsmDMI1TzMzQ049Hr8Wde1Wtyg0WDb1Km4SqXCZ1k2LLJv1GgCxEPtUeCUgkOnFfzGgV0CWcPnT/HlknPqh3OaFo1k1Os/yKrSnkN+fzj3FafgSwNPX2jR6XAoFMLd3d24o6MDezwe7PV6sd/vx4ODg2FVKxT4ckqKQDzUHgXKGN7ct22Yc6/BBS+t78kZtC32pPL+jMb5ofSrWsxUpr2A2BF0Qi6iri+UQTOunBzhWkYGdrvdmOf5UZsnssMF6tVqgXioPQock3HoqIw3PLO8m96qw4vdxhA5T7maOZTcPAcz51N74VyBjjMS6ojgKIzDrblzA40wIrXQ4FhqBNWzbIB4qD1KlCRw6FACr7uXHVTfno1n8Qvx5PZZmLGnDkC8Dh1OkNPK7yglPy6VqqcN5vsmNPgzVUulPuKh9ihSNIlDByfxybcy3ypdM7GsKeV1TFF8CyqOT6YVo1IMn8TDYrGjTa0O3oW3cBea/JFaGSZYKhI5iIfao8weCYd2xvETbSp/zF6JE86zaWZMDsDPqSQ21uVk2aAHLuGBZr9VOzRfIha7SC21/SY2iDlkEfGwLqCRX2I7NLYbnu45icTnlMkCjxQKgYjsSYzkSA0t/ztZD6OxDuYbZAM5qci+kORo2b8CQh8BUvzSd3kOUMMAAAAASUVORK5CYII=)");
         
         // loop al main sections and create their download buttons
-        $(".topics>li.section.main").each(function(index) {
+        //.topics/.weeks
+        $(".weeks>li.section.main, .topics>li.section.main").each(function(index) {
             var group = $(this).attr("id");
             var folder = group.replace("section", "sesion");
             // place only a span if there is nothing to download
@@ -222,7 +226,7 @@ function injmain()
                     $(this).attr("data-name", name);
                     $(this).attr("data-folder", folder);
                     $(this).click( function() { 
-                        triggerDownoad(name, url);
+                        triggerDownload(name, url);
                         return false; 
                     });
                 });
@@ -245,6 +249,3 @@ function injmain()
 }
 
 inject("injmain", injmain);
-
-
-
