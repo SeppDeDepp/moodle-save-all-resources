@@ -7,7 +7,7 @@
 // @description   This script is meant to facilitate the downloads on a Moodle Class by adding a Download All button to every Session.
 // @icon          https://www.google.com/s2/favicons?domain=moodle.org
 // @run-at        document-end
-// @match         https://moodle.ph-ludwigsburg.de/course/view.php*
+// @match         https://moodle.hsr.ch/course/view.php*
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
 // ==/UserScript==
 
