@@ -27,7 +27,8 @@ To be able to use this script in a Moodle installation you will have to add a @m
 
 <h3>How to install</h3>
 <ol>
-    <li>For Firefox install <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">Greasemonkey</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/scriptish/">Scriptish</a>. For Chrome install <a href="https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo">Tampermonkey</a>.</li>
+    <li>1. For Firefox install <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">Greasemonkey</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/scriptish/">Scriptish</a>. For Chrome install <a href="https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo">Tampermonkey</a>.</li>
+	<li>2.Go to [moodle-save-all-resources.user.js](../../raw/master/moodle-save-all-resources.user.js): Greasemonkey should open a dialog window to allow the script installation. Click *Install* and you're all set!</li>
 </ol>
 
 
