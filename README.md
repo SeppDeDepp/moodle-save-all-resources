@@ -2,7 +2,7 @@ moodle-save-all-resources
 =========================
 
 <h3>Purpose</h3>
-This Greasemonkey/Tampermonkey user script is meant to facilitate the downloads on a Moodle Class by adding a Download All button to every Session.
+This Greasemonkey user script is meant to facilitate the downloads on a Moodle Class by adding a Download All button to every Session.
 
 <h3>Features</h3>
 <ul>
@@ -25,10 +25,18 @@ To be able to use this script in a Moodle installation you will have to add a @m
     <li>On PDF files the some browsers asky you to <em>Keep</em> or <em>Discard</em> before actually downloading.</li>
 </ul>
 
-<h3>How to install</h3>
+
+<h3>How to install on Google Chrome</h3>
 <ol>
-    <li>1. For Firefox install <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">Greasemonkey</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/scriptish/">Scriptish</a>. For Chrome install <a href="https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo">Tampermonkey</a>.</li>
-	<li>2.Go to [moodle-save-all-resources.user.js](../../raw/master/moodle-save-all-resources.user.js): Greasemonkey should open a dialog window to allow the script installation. Click *Install* and you're all set!</li>
+    	<li>Download the <a href="../../raw/master/moodle-save-all-resources.user.js">moodle-save-all-resources.user.js</a> file on your computer.</li>
+	<li>Open Google Chrome browser and go to the extension page at: <a href="__chrome://extensions__">__chrome://extensions__</a></li>
+	<li>Simply drag and drop the ``moodle-save-all-resources.user.js`` file on this page.</li>
+</ol>
+
+<h3>How to install on Firefox & Other</h3>
+<ol>
+    	<li>Install the <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">Greasemonkey</a> addon that will manage the script</li>
+	<li>Go to <a href="../../raw/master/moodle-save-all-resources.user.js">moodle-save-all-resources.user.js</a>: Greasemonkey should open a dialog window to allow the script installation. Click *Install* and you're all set!</li>
 </ol>
 
 
