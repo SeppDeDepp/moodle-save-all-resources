@@ -2,7 +2,7 @@ moodle-save-all-resources
 =========================
 
 <h3>Purpose</h3>
-This Greasemonkey user script is meant to facilitate the downloads on a Moodle Class by adding a Download All button to every Session.
+This script is meant to facilitate the downloads on a Moodle Class by adding a Download All button to every Session.
 
 <h3>Features</h3>
 <ul>
@@ -29,7 +29,8 @@ To be able to use this script in a Moodle installation you will have to add a @m
 <h3>How to install on Google Chrome</h3>
 <ol>
     	<li>Download the <a href="../../raw/master/moodle-save-all-resources.user.js">moodle-save-all-resources.user.js</a> file on your computer.</li>
-	<li>Open Google Chrome browser and go to the extension page at: <a href="__chrome://extensions__">__chrome://extensions__</a></li>
+	<li>Open Google Chrome browser and go to the extension page at: 
+	<a href="chrome://extensions/">chrome://extensions</a></li>
 	<li>Simply drag and drop the ``moodle-save-all-resources.user.js`` file on this page.</li>
 </ol>
 
