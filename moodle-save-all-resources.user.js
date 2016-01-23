@@ -196,7 +196,7 @@ function injmain()
         //.topics/.weeks
         $(".weeks>li.section.main, .topics>li.section.main").each(function(index) {
             var group = $(this).attr("id");
-            var folder = group.replace("section", "sesion");
+            var folder = group.replace("section", "session");
             // place only a span if there is nothing to download
             if($(".content .section.img-text .activity.resource a", this).length <= 0)
             {
